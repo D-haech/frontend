@@ -259,6 +259,14 @@ useEffect(() => {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr style={{ fontWeight: 'bold', backgroundColor: '#f5f5f5' }}>
+            <td>Total</td>
+            <td>
+              {accounts.reduce((sum, acc) => sum + (parseFloat(acc.balance) || 0), 0).toFixed(2)}
+            </td>
+          </tr>
+        </tfoot>
       </table>
       
       <h2>Create New Account</h2>
@@ -341,7 +349,9 @@ useEffect(() => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map(tx => {
+          {transactions
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .map(tx => {
             // 🔥 FIXED: Use the helper functions
             const accountName = getAccountName(tx);
             const balance = getBalanceAtTransaction(tx);
