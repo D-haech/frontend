@@ -1,0 +1,13 @@
+{
+  "appId": "com.sabec.businesstracker",
+  "appName": "Business Tracker",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": [
+      "*"
+    ]
+  }
+}
