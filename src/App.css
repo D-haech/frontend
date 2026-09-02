@@ -1,102 +1,590 @@
-.App {
+/* ========================================
+   BOOK SETUP STYLES
+   ======================================== */
+
+.book-setup {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.book-setup-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.book-setup-header h1 {
+  font-size: 32px;
+  color: #1a73e8;
+  margin-bottom: 8px;
+}
+
+.book-setup-header .subtitle {
+  color: #666;
+  font-size: 16px;
+}
+
+.book-list-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.book-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-list-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.btn-create-book {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-create-book:hover {
+  background: #1557b0;
+}
+
+/* Create Book Form */
+.create-book-form {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #e9ecef;
+}
+
+.create-book-form h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.create-book-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.create-book-form .form-group {
+  margin-bottom: 12px;
+}
+
+.create-book-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #555;
+}
+
+.create-book-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.create-book-form small {
+  color: #888;
+  font-size: 12px;
+}
+
+.btn-submit {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  background: #218838;
+}
+
+/* Book List */
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.empty-state .hint {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  background: white;
+  transition: all 0.2s;
+}
+
+.book-card.active {
+  border-left: 4px solid #28a745;
+}
+
+.book-card.closed {
+  border-left: 4px solid #dc3545;
+  opacity: 0.7;
+}
+
+.book-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.book-year {
+  font-size: 14px;
+  color: #666;
+  margin-left: 12px;
+}
+
+.book-status {
+  margin-top: 4px;
+}
+
+.status-badge {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: #e9ecef;
+}
+
+.status-badge.active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.closed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.book-balance {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a73e8;
+  margin-top: 4px;
+}
+
+.btn-select-book {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-select-book:hover {
+  background: #1557b0;
+}
+
+.book-closed-label {
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-message .close-error {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #721c24;
+}
+
+/* ========================================
+   DASHBOARD BOOK HEADER
+   ======================================== */
+
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.book-header .book-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.book-header .book-info h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.book-header .book-year {
+  font-size: 14px;
+  color: #666;
+}
+
+.book-header .book-status-badge {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: #d4edda;
+  color: #155724;
+}
+
+.btn-back {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-back:hover {
+  background: #5a6268;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading-app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+  font-size: 16px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 600px) {
+  .book-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .btn-select-book {
+    width: 100%;
+  }
+  
+  .create-book-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .book-header .book-info {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   LOGIN STYLES
+   ======================================== */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-box {
+  background: white;
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-header h1 {
+  font-size: 28px;
+  color: #1a73e8;
+  margin: 0;
+}
+
+.login-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+.login-form input:disabled {
+  background: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.login-btn:hover {
+  background: #1557b0;
+}
+
+.login-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.login-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.login-error .close-error {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #721c24;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+  font-size: 12px;
+  color: #888;
+}
+
+.login-footer .login-hint {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+/* ========================================
+   APP HEADER (Logout Button)
+   ======================================== */
+
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #c82333;
+}
+
+.login-success {
+  background: #d4edda;
+  color: #155724;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-toggle {
+  text-align: center;
+  margin-top: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.toggle-btn:hover {
+  text-decoration: underline;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.App {
+/* Add this to your App.css */
+.dashboard-container {
   font-family: Arial, sans-serif;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Screen header - visible on screen, hidden on print */
-.screen-header {
-  display: block;
-}
-
-/* Print header - hidden on screen, visible on print */
-.print-header {
-  display: none;
-}
-
-h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-h2 {
-  color: #555;
-  font-size: 18px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-}
-
-table {
+/* Make sure tables work inside dashboard-container */
+.dashboard-container table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-table, th, td {
+.dashboard-container table, 
+.dashboard-container th, 
+.dashboard-container td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
 
-th {
+.dashboard-container th {
   background-color: #f5f5f5;
   font-weight: bold;
 }
 
-tr:hover {
+.dashboard-container tr:hover {
   background-color: #f9f9f9;
 }
 
-form {
+.dashboard-container form {
   margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-select, input {
+.dashboard-container select,
+.dashboard-container input {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -104,7 +592,7 @@ select, input {
   min-width: 150px;
 }
 
-button {
+.dashboard-container button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -115,371 +603,263 @@ button {
   font-weight: bold;
 }
 
-button:hover {
+.dashboard-container button:hover {
   background-color: #0056b3;
 }
+/* ========================================
+   EDIT FORM MODAL STYLES
+   ======================================== */
 
-/* Mobile Responsive */
+.edit-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-form-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.edit-form-modal h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.edit-form-modal .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.edit-form-modal .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form-modal .form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.edit-form-modal .form-group input,
+.edit-form-modal .form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.edit-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.edit-form-actions button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.edit-form-actions button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .edit-form-modal .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .edit-form-modal {
+    padding: 20px;
+  }
+}
+/* ========================================
+   MOBILE-FRIENDLY DASHBOARD
+   ======================================== */
+
+/* Hide mobile actions on desktop */
+.mobile-actions {
+  display: none;
+}
+
+/* Desktop-only column */
+.desktop-only {
+  display: table-cell;
+}
+
+/* Mobile action buttons */
+.btn-edit,
+.btn-delete {
+  padding: 4px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+.btn-edit {
+  background: #ffc107;
+  color: #333;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+
 @media (max-width: 768px) {
-  .App {
-    padding: 10px;
+  /* Hide desktop actions on mobile */
+  .desktop-only {
+    display: none !important;
   }
 
-  h1 {
-    font-size: 20px;
+  /* Show mobile actions */
+  .mobile-actions {
+    display: block;
+    margin-bottom: 20px;
   }
 
-  h2 {
-    font-size: 16px;
+  .mobile-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
 
-  table {
-    font-size: 12px;
+  .mobile-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
   }
 
-  table, th, td {
-    padding: 8px;
+  .mobile-action-buttons {
+    display: flex;
+    gap: 6px;
   }
 
-  form {
+  .btn-edit-mobile,
+  .btn-delete-mobile {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #f8f9fa;
+    transition: background 0.2s;
+  }
+
+  .btn-edit-mobile {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  .btn-delete-mobile {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  .btn-edit-mobile:hover,
+  .btn-delete-mobile:hover {
+    opacity: 0.7;
+  }
+
+  /* Fix form on mobile */
+  .create-form,
+  .transaction-form {
     flex-direction: column;
   }
 
-  select, input {
+  .create-form input,
+  .create-form select,
+  .transaction-form input,
+  .transaction-form select {
     width: 100%;
     min-width: unset;
   }
 
-  button {
+  .create-form button,
+  .transaction-form button {
     width: 100%;
   }
 
-  /* Make tables scrollable on mobile */
-  table {
-    display: block;
+  /* Fix table wrapper */
+  .table-wrapper {
     overflow-x: auto;
-    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 
-  thead {
-    display: none;
+  .table-wrapper table {
+    min-width: 600px;
   }
 
-  tbody {
-    display: block;
+  /* Edit modal on mobile */
+  .edit-form-modal {
+    padding: 20px;
+    width: 95%;
   }
 
-  tr {
-    display: block;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
+  .edit-form-modal .form-group {
+    margin-bottom: 12px;
   }
 
-  td {
-    display: block;
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
-    border: none;
-    border-bottom: 1px solid #eee;
+  .edit-form-actions {
+    flex-direction: column;
   }
 
-  td:before {
-    content: attr(data-label);
-    position: absolute;
-    left: 6px;
-    font-weight: bold;
-    text-align: left;
+  .edit-form-actions button {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .App {
-    padding: 8px;
+  .mobile-item-name {
+    font-size: 12px;
   }
 
-  h1 {
-    font-size: 18px;
-  }
-
-  h2 {
-    font-size: 14px;
-  }
-
-  select, input {
-    font-size: 16px;
-  }
-
-  table, th, td {
-    padding: 6px;
-  }
-}
-
-
-/* ========================================
-   PROFESSIONAL PRINT STYLES 
-   - Statement of Account Format
-   ======================================== */
-
-@media print {
-  /* Reset everything for print */
-  * {
-    background: white !important;
-    color: black !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  /* Hide non-printable elements */
-  .no-print,
-  button,
-  form,
-  input,
-  select,
-  .form-section {
-    display: none !important;
-  }
-
-  /* Hide screen header, show print header */
-  .screen-header {
-    display: none !important;
-  }
-
-  .print-header {
-    display: block !important;
-  }
-
-  /* Main container - full page */
-  .App {
-    max-width: 100% !important;
-    padding: 40px 50px !important;
-    margin: 0 !important;
-    font-family: 'Times New Roman', Times, serif !important;
-  }
-
-  /* ========================================
-     COMPANY HEADER / LETTERHEAD
-     ======================================== */
-  .print-header {
-    text-align: center !important;
-    border-bottom: 3px double #000 !important;
-    padding-bottom: 15px !important;
-    margin-bottom: 25px !important;
-  }
-
-  .print-header h1 {
-    font-size: 24pt !important;
-    font-weight: bold !important;
-    margin: 0 !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase !important;
-  }
-
-  .print-header .subtitle {
-    font-size: 12pt !important;
-    color: #333 !important;
-    margin-top: 5px !important;
-  }
-
-  .print-header .address {
-    font-size: 10pt !important;
-    color: #666 !important;
-    margin-top: 3px !important;
-  }
-
-  /* ========================================
-     STATEMENT TITLE
-     ======================================== */
-  .statement-period {
-    display: block !important;
-    text-align: center !important;
-    font-size: 11pt !important;
-    color: #555 !important;
-    margin-bottom: 20px !important;
-  }
-
-  /* ========================================
-     TRANSACTION TABLE - PROFESSIONAL
-     ======================================== */
-  /* Force table to display as table */
-  .App table {
-    display: table !important;
-    width: 100% !important;
-    border-collapse: collapse !important;
-    font-size: 10pt !important;
-    margin: 0 0 20px 0 !important;
-    page-break-inside: auto !important;
-    border: 2px solid #000 !important;
-    overflow: visible !important;
-    white-space: normal !important;
-  }
-
-  /* Force thead, tbody, tfoot to display properly */
-  .App table thead {
-    display: table-header-group !important;
-  }
-
-  .App table tbody {
-    display: table-row-group !important;
-  }
-
-  .App table tfoot {
-    display: table-footer-group !important;
-  }
-
-  /* Force all rows to display as table rows */
-  .App table tr {
-    display: table-row !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* ========================================
-     TABLE HEADERS
-     ======================================== */
-  .App table thead th {
-    display: table-cell !important;
-    background: #000 !important;
-    color: #fff !important;
-    font-weight: bold !important;
-    font-size: 10pt !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    border: 1px solid #000 !important;
-    padding: 10px 8px !important;
-    text-align: center !important;
-  }
-
-  /* ========================================
-     TABLE CELLS - FORCE BORDERS
-     ======================================== */
-  /* THIS IS THE KEY FIX - using .App table td to override mobile styles */
-  .App table td {
-    display: table-cell !important;
-    border: 1px solid #333 !important;
-    padding: 8px 8px !important;
-    text-align: center !important;
-    font-size: 10pt !important;
-    background: transparent !important;
-  }
-
-  /* Column Alignment */
-  .App table td:nth-child(1) { text-align: center !important; } /* Date */
-  .App table td:nth-child(2) { text-align: left !important; }   /* Account */
-  .App table td:nth-child(3) { text-align: left !important; }   /* Description */
-  .App table td:nth-child(4) { text-align: center !important; } /* Type */
-  .App table td:nth-child(5) { text-align: right !important; }  /* Amount */
-  .App table td:nth-child(6) { text-align: right !important; }  /* Balance */
-
-  /* Alternating row colors for readability */
-  .App table tbody tr:nth-child(even) td {
-    background: #f5f5f5 !important;
-  }
-
-  .App table tbody tr:nth-child(odd) td {
-    background: #ffffff !important;
-  }
-
-  /* ========================================
-     TOTAL ROW (FOOTER)
-     ======================================== */
-  .App table tfoot tr {
-    border-top: 2px solid #000 !important;
-    background: #e8e8e8 !important;
-    font-weight: bold !important;
-  }
-
-  .App table tfoot td {
-    border: 1px solid #333 !important;
-    padding: 10px 8px !important;
-    font-weight: bold !important;
-    font-size: 11pt !important;
-    background: #e8e8e8 !important;
-  }
-
-  /* ========================================
-     OVERRIDE DATA-LABEL (HIDE ON PRINT)
-     ======================================== */
-  .App table td::before,
-  .App table td[data-label]::before {
-    content: "" !important;
-    display: none !important;
-  }
-
-  /* ========================================
-     FOOTER
-     ======================================== */
-  .print-footer {
-    display: block !important;
-    text-align: center !important;
-    font-size: 9pt !important;
-    color: #666 !important;
-    border-top: 1px solid #ccc !important;
-    padding-top: 10px !important;
-    margin-top: 20px !important;
-  }
-
-  .print-footer .timestamp {
-    float: right !important;
-  }
-
-  .print-footer .page-number {
-    float: left !important;
-  }
-
-  /* ========================================
-     PAGE BREAKS
-     ======================================== */
-  h2 {
-    page-break-before: auto !important;
-  }
-
-  .App table {
-    page-break-inside: auto !important;
-  }
-
-  .App table tr {
-    page-break-inside: avoid !important;
-  }
-
-  /* ========================================
-     BORDER STYLES
-     ======================================== */
-  .App table {
-    border: 2px solid #000 !important;
-  }
-
-  .App table thead th:first-child {
-    border-left: 2px solid #000 !important;
-  }
-
-  .App table thead th:last-child {
-    border-right: 2px solid #000 !important;
-  }
-
-  .App table tbody td:first-child {
-    border-left: 2px solid #000 !important;
-  }
-
-  .App table tbody td:last-child {
-    border-right: 2px solid #000 !important;
-  }
-
-  .App table tfoot td:first-child {
-    border-left: 2px solid #000 !important;
-  }
-
-  .App table tfoot td:last-child {
-    border-right: 2px solid #000 !important;
-  }
-
-  /* ========================================
-     CLEARFIX
-     ======================================== */
-  .clearfix::after {
-    content: "" !important;
-    display: table !important;
-    clear: both !important;
+  .btn-edit-mobile,
+  .btn-delete-mobile {
+    padding: 4px 8px;
+    font-size: 12px;
   }
 }
