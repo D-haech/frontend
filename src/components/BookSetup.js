@@ -5,6 +5,8 @@ function BookSetup({ onBookSelected }) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editingBook, setEditingBook] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     year: new Date().getFullYear(),
@@ -13,7 +15,6 @@ function BookSetup({ onBookSelected }) {
   });
   const [error, setError] = useState('');
 
-  // Load user's books
   useEffect(() => {
     fetchBooks();
   }, []);
@@ -55,7 +56,6 @@ function BookSetup({ onBookSelected }) {
 
     API.post('books/', payload)
       .then(res => {
-        // Book created successfully
         setFormData({
           name: '',
           year: new Date().getFullYear(),
@@ -63,14 +63,80 @@ function BookSetup({ onBookSelected }) {
           opening_balance: 0
         });
         setShowCreateForm(false);
-        // Refresh book list
         fetchBooks();
-        // Auto-select the new book
         onBookSelected(res.data);
       })
       .catch(err => {
         console.error('Book creation error:', err);
         setError(err.response?.data?.detail || 'Error creating book. Please try again.');
+      });
+  };
+
+  // ✅ EDIT BOOK
+  const handleEditBook = (book) => {
+    setEditingBook(book);
+    setFormData({
+      name: book.name,
+      year: book.year,
+      start_date: book.start_date || new Date().toISOString().split('T')[0],
+      opening_balance: book.opening_balance || 0
+    });
+    setShowEditForm(true);
+  };
+
+  const handleUpdateBook = (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.name) {
+      setError('Please enter a book name');
+      return;
+    }
+    if (!formData.year) {
+      setError('Please enter a year');
+      return;
+    }
+
+    const payload = {
+      name: formData.name,
+      year: parseInt(formData.year),
+      start_date: formData.start_date,
+      opening_balance: parseFloat(formData.opening_balance) || 0
+    };
+
+    API.put(`books/${editingBook.id}/`, payload)
+      .then(res => {
+        setShowEditForm(false);
+        setEditingBook(null);
+        setFormData({
+          name: '',
+          year: new Date().getFullYear(),
+          start_date: new Date().toISOString().split('T')[0],
+          opening_balance: 0
+        });
+        alert('Book updated successfully!');
+        fetchBooks();
+      })
+      .catch(err => {
+        console.error('Book update error:', err);
+        setError(err.response?.data?.detail || 'Error updating book. Please try again.');
+      });
+  };
+
+  // ✅ DELETE BOOK
+  const handleDeleteBook = (bookId) => {
+    if (!window.confirm('Are you sure you want to delete this book? This will also delete ALL accounts and transactions associated with it.')) {
+      return;
+    }
+
+    API.delete(`books/${bookId}/`)
+      .then(() => {
+        alert('Book deleted successfully!');
+        fetchBooks();
+      })
+      .catch(err => {
+        console.error('Book delete error:', err);
+        alert('Error deleting book: ' + (err.response?.data?.detail || err.message));
       });
   };
 
@@ -172,6 +238,71 @@ function BookSetup({ onBookSelected }) {
           </div>
         )}
 
+        {/* Edit Book Form */}
+        {showEditForm && editingBook && (
+          <div className="edit-form-overlay">
+            <div className="edit-form-modal">
+              <h3>✏️ Edit Book</h3>
+              <form onSubmit={handleUpdateBook}>
+                <div className="form-group">
+                  <label>Book Name</label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={e => setFormData({...formData, name: e.target.value})}
+                    required
+                  />
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Year</label>
+                    <input
+                      type="number"
+                      value={formData.year}
+                      onChange={e => setFormData({...formData, year: parseInt(e.target.value)})}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Start Date</label>
+                    <input
+                      type="date"
+                      value={formData.start_date}
+                      onChange={e => setFormData({...formData, start_date: e.target.value})}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>Opening Balance</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={formData.opening_balance}
+                    onChange={e => setFormData({...formData, opening_balance: e.target.value})}
+                  />
+                </div>
+
+                <div className="edit-form-actions">
+                  <button type="submit" className="btn-save">💾 Save</button>
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setShowEditForm(false);
+                      setEditingBook(null);
+                    }}
+                    className="btn-cancel"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Book List */}
         <div className="book-list">
           {books.length === 0 ? (
@@ -199,17 +330,31 @@ function BookSetup({ onBookSelected }) {
                     </div>
                   )}
                 </div>
-                {book.status === 'active' && (
+                <div className="book-actions">
                   <button 
-                    className="btn-select-book"
-                    onClick={() => handleSelectBook(book)}
+                    onClick={() => handleEditBook(book)}
+                    className="btn-edit-book"
                   >
-                    Open Book →
+                    ✏️ Edit
                   </button>
-                )}
-                {book.status === 'closed' && (
-                  <span className="book-closed-label">Closed</span>
-                )}
+                  <button 
+                    onClick={() => handleDeleteBook(book.id)}
+                    className="btn-delete-book"
+                  >
+                    🗑️ Delete
+                  </button>
+                  {book.status === 'active' && (
+                    <button 
+                      onClick={() => handleSelectBook(book)}
+                      className="btn-select-book"
+                    >
+                      Open Book →
+                    </button>
+                  )}
+                  {book.status === 'closed' && (
+                    <span className="book-closed-label">Closed</span>
+                  )}
+                </div>
               </div>
             ))
           )}

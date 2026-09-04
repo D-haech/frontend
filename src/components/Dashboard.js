@@ -83,11 +83,18 @@ function Dashboard({ book, onBack }) {
       return;
     }
 
+ // ✅ ADD THIS DEBUG
+  console.log('📤 Creating account - book object:', book);
+  console.log('📤 book.id:', book.id);
+
+
     const payload = {
       book: book.id,
       name: accountForm.name,
       balance: parseFloat(accountForm.balance)
     };
+
+ console.log('📤 Full payload:', payload); // ✅ ADD THIS
 
     if (isOnline) {
       API.post('accounts/', payload)
